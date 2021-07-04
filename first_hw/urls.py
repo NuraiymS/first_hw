@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
 from coles_shop import views
+from django.conf import settings
+from django.conf.urls.static import static
 
-urlpatterns = {
+urlpatterns = [
     path('admin/', admin.site.urls),
     path('hello', views.hello_world),
     path('', views.index),
     path('products/<int:id>/', views.product_item),
     path('product/', views.product_list),
-    # path('review/', views.review_list),
+    path('review/', views.review_list),
+    path('category', views.category_list)
 
-}
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
